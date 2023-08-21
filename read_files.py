@@ -1,4 +1,3 @@
-
 import os
 
 file_path = 'C:\\Users\\yaniv\\PycharmProjects\\pythonProject4\\google_docs'
@@ -36,4 +35,3 @@ def read_file(file_path, encoding='latin-1'):
 if __name__ == '__main__':
     your_directory_path = 'google_docs'
     read_files_in_directory()
-
