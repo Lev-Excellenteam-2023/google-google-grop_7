@@ -33,7 +33,7 @@ def search_engine(text: str, dictionary: dict) -> list:
     return [(filename, line_number) for filename, line_number, count in set_of_tuples]
 
 
-def extract_dict_members(input_dict, key_list):
+def extract_5_members(input_dict, key_list):
     result_list = []
 
     for key in key_list:
