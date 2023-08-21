@@ -9,8 +9,9 @@ def insert_line_dict(line: str, path: str, num_line: int) -> None:
     :param path: path of file
     :param num_line: num of line
     """
-    if line != "":
-        line_dict[path, num_line] = line
+    if line != "" and line != '\n':
+        new_line = line.replace('\n', '')
+        line_dict[path, num_line] = new_line
 
 
 def insert_words_dict(line: str, path: str, num_line: int) -> None:
@@ -43,12 +44,13 @@ def insert_words_dict(line: str, path: str, num_line: int) -> None:
         words_dict[word] = next_word_dict
 
     # for last word in line
-    location = [(path, num_line, len(words) - 1)]
-    last_word = remove_non_alnum(words[-1].lower())
-    if last_word not in words_dict:
-        words_dict[last_word] = {"": location}
-    else:
-        words_dict[last_word][""] = location
+    if words:
+        location = (path, num_line, len(words) - 1)
+        last_word = remove_non_alnum(words[-1].lower())
+        if last_word not in words_dict:
+            words_dict[last_word] = {"": [location]}
+        else:
+            words_dict[last_word][""].append(location)
 
 
 def remove_non_alnum(word: str) -> str:
