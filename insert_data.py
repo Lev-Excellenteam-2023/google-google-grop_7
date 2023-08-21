@@ -17,7 +17,7 @@ def insert_words_dict(line: str, path: str, num_line: int) -> None:
     """
     Inserting words into the dictionary
 
-    For example - insert_word_dict("i love py", 'about.txt', 10)
+    For example - insert_word_dict("I love py", 'about.txt', 10)
     {'i': {'love': [('about.txt', 10, 0)]}, 'love':
      {'py': [('about.txt', 10, 1)]}, 'py': {'': [('about.txt', 10, 2)]}}
     :param line: data of line
@@ -27,9 +27,8 @@ def insert_words_dict(line: str, path: str, num_line: int) -> None:
     words = line.split()
 
     for i in range(len(words) - 1):
-        word = words[i].lower()
-
-        next_word = " ".join(words[i + 1: i + 2]).lower()
+        word = remove_non_alnum(words[i].lower())
+        next_word = remove_non_alnum(" ".join(words[i + 1: i + 2]).lower())
 
         if word not in words_dict:
             words_dict[word] = {}
@@ -45,7 +44,24 @@ def insert_words_dict(line: str, path: str, num_line: int) -> None:
 
     # for last word in line
     location = [(path, num_line, len(words) - 1)]
-    if words[-1].lower() not in words_dict:
-        words_dict[words[-1].lower()] = {"": location}
+    last_word = remove_non_alnum(words[-1].lower())
+    if last_word not in words_dict:
+        words_dict[last_word] = {"": location}
     else:
-        words_dict[words[-1]][""] = location
+        words_dict[last_word][""] = location
+
+
+def remove_non_alnum(word: str) -> str:
+    """
+    Remove char from word if not isalnum
+    :param word:
+    :return: word after removing
+    """
+    if word.isalnum():
+        return word
+    new_word = ""
+    for ch in word:
+        if ch.isalnum():
+            new_word += ch
+
+    return new_word
