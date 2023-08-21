@@ -1,27 +1,3 @@
-# def search_engine(text: str, dictionary: dict) -> list:
-#     """
-#
-#     :param text: from the user
-#     :param dictionary: from the database
-#     :return: list of tapels with the name of the file and the number of the line
-#     """
-#     result = []
-#     line = text.split(" ")
-#     size = len(line)
-#     set_of_tapels = set()
-#     for word in range(size):
-#         if line[word] in dictionary:
-#             if line[word + 1] in dictionary[line[word]]:
-#                 if word != 0:
-#                     set_of_tapels_temp = set(dictionary[line[word]][line[word + 1]].copy())
-#                     set_of_tapels = set_of_tapels_temp.intersection(set_of_tapels)
-#                 else:
-#                     set_of_tapels = set(dictionary[line[word]][line[word + 1]].copy())
-#                 list_of_tapels = dictionary[line[word]][line[word + 1]].copy()
-#                 for tapel in list_of_tapels:
-#                     tapel[2] = tapel[2] + 1
-
-
 def search_engine(text: str, dictionary: dict) -> list:
     """
     :param text: from the user
@@ -55,3 +31,14 @@ def search_engine(text: str, dictionary: dict) -> list:
 
     # Create the final result list with filenames and line numbers
     return [(filename, line_number) for filename, line_number, count in set_of_tuples]
+
+
+def extract_dict_members(input_dict, key_list):
+    result_list = []
+
+    for key in key_list:
+        if key in input_dict:
+            result_list.append(input_dict[key])
+
+    result_list.sort()  # Sort the extracted values
+    return result_list[:5]
