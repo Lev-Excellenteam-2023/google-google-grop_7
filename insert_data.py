@@ -50,7 +50,14 @@ def insert_words_dict(line: str, path: str, num_line: int) -> None:
         if last_word not in words_dict:
             words_dict[last_word] = {"": [location]}
         else:
-            words_dict[last_word][""].append(location)
+            next_word_dict = words_dict[last_word]
+            if "" not in next_word_dict:
+                next_word_dict[""] = [location]
+            else:
+                next_word_dict[""].append(location)
+
+            #words_dict[last_word][""].append(location)
+            words_dict[last_word] = next_word_dict
 
 
 def remove_non_alnum(word: str) -> str:

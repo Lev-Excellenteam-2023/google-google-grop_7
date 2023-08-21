@@ -1,8 +1,7 @@
 import os
 from insert_data import *
 
-#these two lines need to delete
-file_path = 'C:\\Users\\yaniv\\PycharmProjects\\pythonProject4\\google_docs'
+file_path = 'C:\\Networks\\google\\data'
 os.environ['MY_ROOT_PATH'] = file_path
 
 
@@ -29,7 +28,7 @@ def read_file(file_path, encoding='latin-1'):
             for line_number, line in enumerate(file, start=1):
                 insert_line_dict(line, file_path,line_number)
                 insert_words_dict(line,file_path,line_number)
-              # print(f"Line {line_number}: {line.strip()}")
+
     except UnicodeDecodeError:
         print(f"Error reading {file_path} with {encoding} encoding")
 
