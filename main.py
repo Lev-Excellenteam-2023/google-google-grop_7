@@ -6,9 +6,13 @@ import re
 
 
 def main():
+    if len(sys.argv) < 2:
+        print("pathless")
+        return
+    path = sys.argv[1]
     dict_line = {}
     dict_words = {}
-    read_files.read_files_in_directory(dict_line, dict_words)
+    read_files.read_files_in_directory(dict_line, dict_words, path)
     user_input = ""
     print("Enter a search")
     while True:
@@ -21,6 +25,7 @@ def main():
         if user_input != "":
             user_input = re.sub(r'[^a-zA-Z0-9]', ' ', user_input)
             user_input = re.sub(r'\s+', ' ', user_input).strip()
+            user_input = user_input.lower()
             all_result = search_mode.search_engine(user_input, dict_words)
             result = search_mode.extract_5_members(dict_line, all_result)
             print_list(result)
@@ -28,10 +33,12 @@ def main():
             print(user_input, end="")
 
 
-def print_list(list):
+def print_list(list_result):
     text = "The search yielded the following results:\n"
-    for index in range(len(list)):
-        text += str(index + 1) + ": " + list[index] + "\n"
+    if len(list_result) == 0:
+        text += "No match found"
+    for index in range(len(list_result)):
+        text += str(index + 1) + ": " + list_result[index] + "\n"
     print(text)
 
 
