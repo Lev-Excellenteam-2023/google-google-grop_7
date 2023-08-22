@@ -1,3 +1,5 @@
+from completion import get_similar_words
+
 
 def offset_location(text: str, index: int):
     """
@@ -18,15 +20,11 @@ def complete_lists(text: str, list_keywords: list):
     words = text.split(" ")
     for index in range(len(words)):
         offset = offset_location(text, index)
-        # function(words, offset, list_keywords)
-        # tupls = [(word, score), (), ()....]
-        tupls = []
+        tupls = get_similar_words(words[index], offset, list_keywords)
         for tup_i in range(len(tupls)):
             line = words.copy()
             line[index] = tupls[tup_i][0]
             line = " ".join(line)
-            tupls[tup_i] = (line, tupls[tup_i][1])
-
-        tup_list.append(tupls)
+            tup_list.append((line, tupls[tup_i][1]))
 
     return sorted(tup_list, key=lambda x: x[2])
