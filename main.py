@@ -1,5 +1,6 @@
 import sys
 
+import clear_text
 import search_mode
 import read_files
 import re
@@ -9,6 +10,7 @@ from complete_lists import complete_lists
 
 def insert_score_offset(line_result: str, sentence: str, score: int = 0) -> str:
     new_line_result = line_result.lower()
+    new_line_result = clear_text.remove_non_alnum_lins(new_line_result)
     index = new_line_result.find(sentence)
     line = line_result + ' ,score = ' + str(len(sentence) * 2 - score) + ', offset = ' + str(index)
     return line
