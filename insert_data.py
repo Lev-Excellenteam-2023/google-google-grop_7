@@ -1,7 +1,7 @@
 from clear_text import remove_non_alnum
 
 
-def insert_line_dict(line: str, path: str, num_line: int,  dict_line: dict) -> None:
+def insert_line_dict(line: str, path: str, num_line: int, dict_line: dict) -> None:
     """
     Inserting a line into the dictionary, path and num line are keys
     :param line: data of line
@@ -56,6 +56,3 @@ def insert_words_dict(line: str, path: str, num_line: int, dict_words: dict) -> 
                 next_word_dict[""].append(location)
 
             dict_words[last_word] = next_word_dict
-
-
-

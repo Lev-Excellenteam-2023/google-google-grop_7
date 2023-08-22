@@ -1,6 +1,7 @@
 import os
 from insert_data import *
 
+
 # file_path = r"C:\exselentim\bootcamp\google\archive\python-3.8.4-docs-text\distutils"
 # os.environ['MY_ROOT_PATH'] = file_path
 

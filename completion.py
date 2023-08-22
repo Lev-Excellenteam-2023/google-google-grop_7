@@ -21,10 +21,9 @@ def calculate_score(original_word: str, new_word: str, offset: int):
 
     # if the adding or lacking in the last letter
     if len_original_word < len_new_word:
-        return score_to_index(len_new_word-1+offset)*2
+        return score_to_index(len_new_word - 1 + offset) * 2
     if len_original_word > len_new_word:
-        return score_to_index(len_original_word-1+offset)*2
-
+        return score_to_index(len_original_word - 1 + offset) * 2
 
 
 def score_to_index(index):

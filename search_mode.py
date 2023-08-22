@@ -25,7 +25,7 @@ def search_engine(text: str, dictionary: dict) -> list:
     for word in range(1, len(words) - 1):
         if words[word] in dictionary and words[word + 1] in dictionary[words[word]]:
             # Intersect the set of tuples with new search results
-            set_temp = set(dictionary[words[word]][words[word+1]])
+            set_temp = set(dictionary[words[word]][words[word + 1]])
             set_intersection = set_temp.intersection(set_of_tuples)
             # Increment the count value for each tuple
             set_of_tuples = [(filename, line_number, count + 1) for filename, line_number, count in set_intersection]
