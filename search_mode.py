@@ -6,7 +6,6 @@ def search_engine(text: str, dictionary: dict) -> list:
     """
     words = text.split(" ")
     set_of_tuples = set()
-
     # Handle the case when only one word is present in the input
     if words[0] in dictionary and len(words) == 1:
         # Return all tuples associated with the first word in the dictionary
@@ -30,15 +29,16 @@ def search_engine(text: str, dictionary: dict) -> list:
             set_intersection = set_temp.intersection(set_of_tuples)
             # Increment the count value for each tuple
             set_of_tuples = [(filename, line_number, count + 1) for filename, line_number, count in set_intersection]
+        else:
+            # No matches found, return an empty result
+            return []
 
     # Create the final result list with filenames and line numbers
-    res = [(filename, line_number) for filename, line_number, count in set_of_tuples]
-    return res
+    return [(filename, line_number) for filename, line_number, count in set_of_tuples]
 
 
 def extract_5_members(input_dict, key_list):
     result_list = []
-
     for key in key_list:
         if key in input_dict:
             result_list.append(input_dict[key] + " " + str(key))
