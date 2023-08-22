@@ -26,5 +26,4 @@ def complete_lists(text: str, list_keywords: list):
             line[index] = tupls[tup_i][0]
             line = " ".join(line)
             tup_list.append((line, tupls[tup_i][1]))
-
-    return sorted(tup_list, key=lambda x: x[2])
+    return sorted(tup_list, key=lambda x: x[1])
