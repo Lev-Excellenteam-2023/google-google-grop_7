@@ -4,6 +4,8 @@ import search_mode
 import read_files
 import re
 
+from complete_lists import complete_lists
+
 
 def insert_score_offset(line_result: str, sentence: str, score: int = 0) -> str:
     index = line_result.find(sentence)
@@ -21,19 +23,20 @@ def results_search(sentence: str, dict_line: dict, dict_words: dict) -> list:
     """
     all_result = search_mode.search_engine(sentence, dict_words)
     result = search_mode.extract_5_members(dict_line, all_result)
-
-    if len(result) < 5:
-        change_letters_list = []#complete_lists(sentence, dict_words.keys())
-        for words in change_letters_list:
-            all_result = search_mode.search_engine(words[0], dict_words)
-            temp_result = search_mode.extract_5_members(dict_line, all_result)
-            result += temp_result
-            if len(result) >= 5:
-                result = result[:5]
-                break
     result_with_score_offset = []
     for res in result:
         result_with_score_offset.append(insert_score_offset(res, sentence))
+
+    if len(result_with_score_offset) < 5:
+        change_letters_list = complete_lists(sentence, list(dict_words.keys()))
+        for words in change_letters_list:
+            all_result = search_mode.search_engine(words[0], dict_words)
+            temp_result = search_mode.extract_5_members(dict_line, all_result)
+            for res in temp_result:
+                if len(result_with_score_offset) < 5:
+                    result_with_score_offset.append(insert_score_offset(res, words[0], words[1]))
+                else:
+                    break
 
     return result_with_score_offset
 
