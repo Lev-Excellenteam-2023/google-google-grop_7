@@ -8,8 +8,9 @@ from complete_lists import complete_lists
 
 
 def insert_score_offset(line_result: str, sentence: str, score: int = 0) -> str:
-    index = line_result.find(sentence)
-    line = line_result + ' ,score = ' + str(len(line_result) * 2 - score) + ', offset = ' + str(index)
+    new_line_result = line_result.lower()
+    index = new_line_result.find(sentence)
+    line = line_result + ' ,score = ' + str(len(sentence) * 2 - score) + ', offset = ' + str(index)
     return line
 
 
