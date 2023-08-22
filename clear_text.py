@@ -12,3 +12,17 @@ def remove_non_alnum(word: str) -> str:
             new_word += ch
 
     return new_word
+
+
+def remove_non_alnum_lins(line: str) -> str:
+    """
+    Remove char from line if not isalnum
+    :param line:
+    :return: line after removing
+    """
+    new_line = ""
+    text = line.split(" ")
+    for ch in text:
+        new_line += remove_non_alnum(ch) + " "
+
+    return new_line
