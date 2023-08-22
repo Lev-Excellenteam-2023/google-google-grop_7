@@ -10,21 +10,21 @@ def calculate_score(original_word: str, new_word: str, offset: int):
     :param offset: The offset of the word in the full sentence.
     :return: The calculated score.
     """
-    score = 0
     len_original_word = len(original_word)
     len_new_word = len(new_word)
     for i in range(min(len_original_word, len_new_word)):
         if original_word[i] != new_word[i]:
             score = score_to_index(i + offset)
-            break
-    # if there is adding or lacking of letter
-    if len_original_word != len_new_word:
-        # if the adding or lacking in the last letter
-        if original_word[len_original_word - 1] != new_word[len_new_word - 1]:
-            index = max(len_original_word, len_new_word)
-            score = score_to_index(index)
-        score = score * 2
-    return score
+            if len_original_word != len_new_word:
+                score = score * 2
+            return score
+
+    # if the adding or lacking in the last letter
+    if len_original_word < len_new_word:
+        return score_to_index(len_new_word-1+offset)*2
+    if len_original_word > len_new_word:
+        return score_to_index(len_original_word-1+offset)*2
+
 
 
 def score_to_index(index):
@@ -60,4 +60,3 @@ def get_similar_words(word: str, offset: int, words_list: list):
         if Levenshtein.distance(word, ref_word) == 1:
             single_letter_errors.append((ref_word, calculate_score(ref_word, word, offset)))
     return single_letter_errors
-
