@@ -16,6 +16,12 @@ def offset_location(text: str, index: int):
 
 
 def complete_lists(text: str, list_keywords: list):
+    """
+    Return a list of tuples of the form (text, offset) where text is the text with the word at the index
+    :param text:
+    :param list_keywords:
+    :return:
+    """
     tup_list = []
     words = text.split(" ")
     for index in range(len(words)):
